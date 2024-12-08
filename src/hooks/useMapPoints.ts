@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
 import { GeoJSONFeature, Map } from "mapbox-gl";
-import { MAP_HIGHLIGHTED_POINT_LAYER_ID, MAP_HIGHLIGHTED_POINT_SOURCE_ID } from "../shared/constants";
+import { MAP_BASE_POINTS_LAYER_ID, MAP_HIGHLIGHTED_POINT_LAYER_ID, MAP_HIGHLIGHTED_POINT_SOURCE_ID } from "../shared/constants";
 import { addPoints, extractMapData } from "../helpers/helpers";
 
 const pointsData: GeoJSON.FeatureCollection = require("../data/points.json");
@@ -12,20 +12,20 @@ export const useMapPoints = () => {
   const [highlightedPointId, setHighlightedPointId] = useState<number | null>(null);
 
   const handleShowPoints = () => {
-    if (!mapRef.current) {
+    if (!mapRef.current || !mapRef.current.getLayer(MAP_BASE_POINTS_LAYER_ID)) {
       return;
     }
 
-    const mapPoints: GeoJSONFeature[] = mapRef.current.queryRenderedFeatures();
+    // Keep only base points layer 
+    const mapPoints: GeoJSONFeature[] = mapRef.current.queryRenderedFeatures({ layers: [MAP_BASE_POINTS_LAYER_ID]});
 
     if (mapPoints.length === 0) {
+      setRenderedPoints([]);
+    
       return;
     }
 
-    // When point is highlited, be sure to remove highlited duplicate
-    setRenderedPoints(
-      highlightedPointId ? mapPoints.filter((point) => point.layer?.id !== MAP_HIGHLIGHTED_POINT_LAYER_ID) : mapPoints
-    );
+    setRenderedPoints(mapPoints);
   };
 
   const handleHightlightPoint = (id: number) => { 
