@@ -4,7 +4,7 @@ self.onmessage = ({data}) => {
   const displayedData: GeoJSON.FeatureCollection = {
     ...pointsData,
     features: [...pointsData.features].filter(
-      (x) => x.geometry.coordinates[1] > 48.8534
+      (feature) => feature.geometry.coordinates[1] > 48.8534
     ),
   };
 

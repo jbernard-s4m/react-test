@@ -39,38 +39,40 @@ const mockGeoJsonData: GeoJSON.FeatureCollection = {
       },]
 }
 
-it('extracts well formatted base map data and layer', () => {
-  const expectedMapData: MapData = {
-    source: {
-      type: "geojson",
-      data: mockGeoJsonData,
-    },
-    layer: {
-      id: MAP_BASE_POINTS_LAYER_ID,
-      source: MAP_BASE_POINTS_SOURCE_ID,
-      ...MapDefaultPointStyle,
-    }
-  };
-
-  const receivedMapData = extractMapData(mockGeoJsonData, true);
-
-  expect(receivedMapData).toEqual(expectedMapData);
-});
-
-it('extracts well formatted highlight map data and layer', () => {
-  const expectedMapData: MapData = {
-    source: {
-      type: "geojson",
-      data: mockGeoJsonData,
-    },
-    layer: {
-      id: MAP_HIGHLIGHTED_POINT_LAYER_ID,
-        source: MAP_HIGHLIGHTED_POINT_SOURCE_ID,
-        ...MapHighlightedPointStyle,
-    }
-  };
-
-  const receivedMapData = extractMapData(mockGeoJsonData, false);
-
-  expect(receivedMapData).toEqual(expectedMapData);
-});
+describe('helpers.ts', () => {
+  it('extracts well formatted base map data and layer', () => {
+    const expectedMapData: MapData = {
+      source: {
+        type: "geojson",
+        data: mockGeoJsonData,
+      },
+      layer: {
+        id: MAP_BASE_POINTS_LAYER_ID,
+        source: MAP_BASE_POINTS_SOURCE_ID,
+        ...MapDefaultPointStyle,
+      }
+    };
+  
+    const receivedMapData = extractMapData(mockGeoJsonData, true);
+  
+    expect(receivedMapData).toEqual(expectedMapData);
+  });
+  
+  it('extracts well formatted highlight map data and layer', () => {
+    const expectedMapData: MapData = {
+      source: {
+        type: "geojson",
+        data: mockGeoJsonData,
+      },
+      layer: {
+        id: MAP_HIGHLIGHTED_POINT_LAYER_ID,
+          source: MAP_HIGHLIGHTED_POINT_SOURCE_ID,
+          ...MapHighlightedPointStyle,
+      }
+    };
+  
+    const receivedMapData = extractMapData(mockGeoJsonData, false);
+  
+    expect(receivedMapData).toEqual(expectedMapData);
+  });
+})

@@ -1,5 +1,5 @@
 // Paris Coordinates
-export const INITIAL_CENTERED_COORDINATES: [latitude: number, longitude: number] = [2.3514, 48.8575];
+export const INITIAL_CENTERED_COORDINATES: [longitude: number, latitude: number] = [2.3514, 48.8575];
 
 export const MAP_BASE_POINTS_SOURCE_ID = 'base-points'
 
