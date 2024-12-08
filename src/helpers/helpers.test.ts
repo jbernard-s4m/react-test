@@ -2,6 +2,7 @@ import 'jest';
 import { MAP_BASE_POINTS_LAYER_ID, MAP_BASE_POINTS_SOURCE_ID, MAP_HIGHLIGHTED_POINT_LAYER_ID, MAP_HIGHLIGHTED_POINT_SOURCE_ID } from '../shared/constants';
 import { MapDefaultPointStyle, MapHighlightedPointStyle } from '../styles/styles';
 import { extractMapData } from './helpers';
+import { MapData } from '../shared/types';
 
 const mockGeoJsonData: GeoJSON.FeatureCollection = {
   "type":"FeatureCollection",
@@ -39,7 +40,7 @@ const mockGeoJsonData: GeoJSON.FeatureCollection = {
 }
 
 it('extracts well formatted base map data and layer', () => {
-  const expectedMapData = {
+  const expectedMapData: MapData = {
     source: {
       type: "geojson",
       data: mockGeoJsonData,
@@ -57,7 +58,7 @@ it('extracts well formatted base map data and layer', () => {
 });
 
 it('extracts well formatted highlight map data and layer', () => {
-  const expectedMapData = {
+  const expectedMapData: MapData = {
     source: {
       type: "geojson",
       data: mockGeoJsonData,

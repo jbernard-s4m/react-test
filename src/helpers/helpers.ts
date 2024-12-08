@@ -1,8 +1,9 @@
 import { SourceSpecification, Layer, Map } from "mapbox-gl";
 import { MAP_BASE_POINTS_LAYER_ID, MAP_BASE_POINTS_SOURCE_ID, MAP_HIGHLIGHTED_POINT_LAYER_ID, MAP_HIGHLIGHTED_POINT_SOURCE_ID } from "../shared/constants";
 import { MapDefaultPointStyle, MapHighlightedPointStyle } from "../styles/styles";
+import { MapData } from "../shared/types";
 
-export const extractMapData = (data: GeoJSON.FeatureCollection, isBaseLayer: boolean = true ) => {
+export const extractMapData = (data: GeoJSON.FeatureCollection, isBaseLayer: boolean = true ): MapData => {
     const source: SourceSpecification = {
       type: "geojson",
       data,
